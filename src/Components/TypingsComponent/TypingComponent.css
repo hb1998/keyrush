@@ -1,0 +1,49 @@
+body{
+    background:lightblue;
+}
+.typingWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    flex-direction: column;
+}
+.displayContainer{
+    background-color: white;
+    max-width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.displayContainer .word{
+    font-size: 24px;
+    padding: 2px 7px;
+    margin: 5px;
+}
+
+.activeWord{
+    background: #e8e8e8;
+}
+.typingContainer{
+    min-width: 800px;
+    display: flex;
+    align-items: center;
+}
+.typeCanvas{
+    margin: 20px;
+    width: 80%;
+}
+
+.typeField{
+    width: 95%;
+    padding: 10px;
+    font-size: 24px;
+}
+
+.timer{
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 24px;
+    background-color: #009688;
+    color: white;
+}
