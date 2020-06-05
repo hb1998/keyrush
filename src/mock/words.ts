@@ -314,7 +314,7 @@ function getRandomWord():word {
         
     }
 }
-export function getRandomWords(limit = 30):word[] {
+export function getRandomWords(limit = 50):word[] {
     let randomWords = []
     for (let i = 0; i < limit; i++) {
         randomWords.push(getRandomWord())
