@@ -3,12 +3,15 @@ import logo from './logo.svg';
 import './App.css';
 import TypingComponent from './Components/TypingsComponent/TypingComponent';
 import RaceComponent from './Components/RaceComponent/RaceComponent';
+import { GlobalProvider } from './state/GlobalState';
 
 function App() {
   return (
     <div className="App">
-      <RaceComponent/>
-      <TypingComponent />
+      <GlobalProvider>
+        <RaceComponent />
+        <TypingComponent />
+      </GlobalProvider>
     </div>
   );
 }
