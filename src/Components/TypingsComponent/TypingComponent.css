@@ -1,5 +1,6 @@
 body{
-    background:lightblue;
+    /* background:lightblue; */
+    background:#1e1d1d;
 }
 .typingWrapper{
     display: flex;
@@ -9,7 +10,9 @@ body{
     flex-direction: column;
 }
 .displayContainer{
-    background-color: white;
+    /* background-color: white; */
+    background-color: black;
+    color: white;
     max-width: 800px;
     display: flex;
     flex-wrap: wrap;
@@ -22,7 +25,8 @@ body{
 }
 
 .activeWord{
-    background: #e8e8e8;
+    /* background: #e8e8e8; */
+    background: #867979;
 }
 .typingContainer{
     min-width: 800px;
@@ -40,10 +44,12 @@ body{
     font-size: 24px;
 }
 
-.timer{
+.timer,.actions{
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 24px;
     background-color: #009688;
     color: white;
+    cursor: pointer;
+    margin-right:10px;
 }

@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect, useContext } from 'react'
+import React, { ReactElement, useState, useEffect, useContext, useRef } from 'react'
 import './TypingComponent.css'
 import { getRandomWords, word } from '../../mock/words'
 import { GlobalContext } from '../../state/GlobalState'
@@ -9,24 +9,31 @@ interface Props {
 
 const MAX_TIMER = 60
 export default function TypingComponent({ }: Props): ReactElement {
-    const [words, setWords] = useState<word[]>(getRandomWords())
+    const [words, setWords] = useState<word[]>([])
     const [timer, setTimer] = useState(MAX_TIMER)
     const [typingStarted, setTypingStarted] = useState(false)
     const [currentWordConfig, setCurrentWordConfig] = useState({ text: '', index: 0 })
-    const {initCars,updateCar} = useContext(GlobalContext)
-    let interval;
+    const { initCars, updateCar } = useContext(GlobalContext)
+    const interval = useRef<any>();
+
     useEffect(() => {
         initRace()
     }, [])
 
+    useEffect(() => {
+        console.log(timer)
+        if (timer === 0) {
+            alert('Timesup')
+            computeResult(true);
+            initRace()
+            clearInterval(interval.current)
+        }
+
+    }, [timer])
+
     const startTimer = () => {
-        interval = setInterval(() => {
-            if (timer === 0) {
-                console.log('Timesup')
-                clearInterval(interval)
-            } else {
-                setTimer(timer => timer - 1)
-            }
+        interval.current = setInterval(() => {
+            setTimer(timer => timer - 1)
         }, 1000);
     }
 
@@ -54,7 +61,8 @@ export default function TypingComponent({ }: Props): ReactElement {
             }
         }
         if (iter + 1 >= updatedWords.length) {
-            computeResult(true)
+            computeResult(true);
+            initRace()
 
         } else {
             updatedWords[iter].correct = currentWordConfig.text === updatedWords[iter].text
@@ -65,33 +73,35 @@ export default function TypingComponent({ }: Props): ReactElement {
             }))
             setWords(updatedWords)
             updateCar({
-                name:'user',
-                correctWords:computeResult().correctWords,
-                totalWords:50,
-                id:1
+                name: 'user',
+                correctWords: computeResult().correctWords,
+                totalWords: 50,
+                id: 1
             })
         }
     }
-    const computeResult = (showRes= false) => {
+    const computeResult = (showRes = false) => {
         const correctWords = words.reduce((acc, word) => word.correct ? acc + 1 : acc, 0)
         const wpm = ((correctWords / (MAX_TIMER - timer)) / 100 * 60) * 100
-        if(showRes){
+        if (showRes) {
             alert(JSON.stringify({ correct: correctWords, wpm }))
         }
-        return {correctWords,wpm}
+        return { correctWords, wpm }
     }
 
     const initRace = () => {
-        const firstWord = words[0]
+        const randomWords = getRandomWords()
+        const firstWord = randomWords[0]
         firstWord.current = true;
+        setTypingStarted(false);
         setTimer(MAX_TIMER)
-        if (interval) clearInterval(interval)
-        setWords([firstWord, ...words.slice(1, words.length)])
+        if (interval.current) clearInterval(interval.current)
+        setWords(randomWords)
         initCars([{
-            name:'user',
-            correctWords:0,
-            totalWords:50,
-            id:1
+            name: 'user',
+            correctWords: 0,
+            totalWords: 50,
+            id: 1
         }])
     }
 
@@ -109,13 +119,13 @@ export default function TypingComponent({ }: Props): ReactElement {
             </div>
             <div className="typingContainer">
                 <div className="typeCanvas">
-                    <input value={currentWordConfig.text} onChange={onChangeHandler} className="typeField" type="text" />
+                    <input autoFocus value={currentWordConfig.text} onChange={onChangeHandler} className="typeField" type="text" />
+                </div>
+                <div className="actions">
+                    <div onClick={initRace} >Reload</div>
                 </div>
                 <div className="timer">
                     {timer}
-                </div>
-                <div className="actions">
-
                 </div>
             </div>
         </div>

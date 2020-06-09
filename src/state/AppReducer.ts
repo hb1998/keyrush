@@ -1,6 +1,5 @@
 import {initialState} from './GlobalState'
 export default (state:initialState, action):initialState => {
-    debugger
     switch (action.type) {
       case "INIT_CARS":
         return {
