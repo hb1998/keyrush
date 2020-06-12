@@ -112,7 +112,7 @@ export default function TypingComponent({ }: Props): ReactElement {
                     words.map((word, index) => (
                         <span key={index}
                             className={word.current ? 'word  activeWord' : 'word'}
-                            style={word.correct ? { color: 'green' } : word.visited ? { color: 'red' } : {}}
+                            style={word.correct ? { color: '#42F76A' } : word.visited ? { color: '#f80043' } : {}}
                         >{word.text}</span>
                     ))
                 }

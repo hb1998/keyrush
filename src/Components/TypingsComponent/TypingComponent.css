@@ -1,6 +1,7 @@
 body{
     /* background:lightblue; */
-    background:#1e1d1d;
+    background:#1A1820;
+    
 }
 .typingWrapper{
     display: flex;
@@ -10,13 +11,16 @@ body{
     flex-direction: column;
 }
 .displayContainer{
-    /* background-color: white; */
-    background-color: black;
-    color: white;
+    background-color: #221E29;
+    color: #fff;
     max-width: 800px;
     display: flex;
+    border-radius: 5px;
+    padding: 0px;
     flex-wrap: wrap;
+    box-shadow: -5px -5px 10px rgba(255,255,255,0.1), -5px -5px 15px rgba(0,0,0, 0.5);
 }
+
 
 .displayContainer .word{
     font-size: 24px;
@@ -25,8 +29,8 @@ body{
 }
 
 .activeWord{
-    /* background: #e8e8e8; */
-    background: #867979;
+    background: #e8e8e8;
+    background: #4c5451;
 }
 .typingContainer{
     min-width: 800px;
@@ -48,7 +52,7 @@ body{
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 24px;
-    background-color: #009688;
+    background-color: #5BB1F9;
     color: white;
     cursor: pointer;
     margin-right:10px;
